@@ -35,4 +35,9 @@ class Gambar extends Controller
         $table->save();
         dd($table);
     }
+    public function showimg(){
+        $gambar=Images::all();
+        return view('image.show')->with('data',$gambar);
+    }
+    
 }

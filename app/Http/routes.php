@@ -39,4 +39,5 @@ Route::group(['middleware' => ['web']], function () {
 	// Route Gambar
 	Route::get('image/form','Gambar@getForm');	
 	Route::post('image/insert','Gambar@store');
+	Route::get('image','Gambar@showimg');
 });
