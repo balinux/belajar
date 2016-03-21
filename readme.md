@@ -1,5 +1,7 @@
 # Laravel PHP Framework
 
+[![Join the chat at https://gitter.im/balinux/belajar](https://badges.gitter.im/balinux/belajar.svg)](https://gitter.im/balinux/belajar?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
 [![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
