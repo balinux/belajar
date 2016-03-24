@@ -14,24 +14,24 @@
 	<form action="{{URL::to('insert')}}" method="POST" >
 	{{csrf_field()}}
 		
-		<input type="text" name="first_name" placeholder="nama awal">
-		@if($errors->has('first_name'))
+		<input type="text" name="username" placeholder="username">
+		@if($errors->has('username'))
 
-		<span style="color:red;">{!!$errors->first('first_name')!!}  </span>
+		<span style="color:red;">{!!$errors->first('username')!!}  </span>
 		
 		@endif
 		<br>
-		<input type="text" name="last_name" placeholder="nama akhir">
-		@if($errors->has('last_name'))
+		<input type="text" name="name" placeholder="name">
+		@if($errors->has('name'))
 
-		<span style="color:red;">{!!$errors->first('last_name')!!}  </span>
+		<span style="color:red;">{!!$errors->first('name')!!}  </span>
 		
 		@endif
 		<br>
-		<textarea name="address" placeholder="almat"></textarea>
-		@if($errors->has('address'))
+		<input type="text" name="email" placeholder="email">
+		@if($errors->has('email'))
 
-		<span style="color:red;">{!!$errors->first('address')!!}  </span>
+		<span style="color:red;">{!!$errors->first('email')!!}  </span>
 		
 		@endif
 		<br>

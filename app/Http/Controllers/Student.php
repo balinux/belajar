@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use App\Model\Students;
+use App\Model\ofuser;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -13,8 +14,12 @@ class Student extends Controller
 {
 
 	public function show(){
-		$tampil=Students::all();
-		return view('student.show')->with('data',$tampil);
+        // $tampil = DB::select('select * from ofuser where username =:username', ['username'=>'admin']);
+        $tampil = DB::table('ofuser')->get();
+		// $tampil=Students::all();
+        // dd($tampil);
+        return view('student.show', ['data' => $tampil]);
+		// return view('student.show')->with('data',$tampil);
 	}
 
 
@@ -25,41 +30,60 @@ class Student extends Controller
     public function store(Request $data){
 
     	$validation = Validator::make($data->all(),array(
-    		'first_name' => 'required',
-    		'last_name' => 'required',
-    		'address' => 'required',
+    		'username' => 'required',
+    		'name' => 'required',
+    		'email' => 'required',
     		));
     	if ($validation->fails()) {
     		return redirect('form')->withErrors($validation);
     	}else{
 
-    	$table = new Students;
-    	$table->firstname = $data->Input('first_name');
-    	$table->lastname = $data->Input('last_name');
-    	$table->address = $data->Input('address');
-    	$table->save();
+            $tables= DB::table('ofuser')->insert([
+                'username' => $data->Input('username'),
+                'name' => $data->Input('name'),
+                'email' => $data->Input('email')]);
+
+    	// $table = new Students;
+    	// $table->firstname = $data->Input('first_name');
+    	// $table->lastname = $data->Input('last_name');
+    	// $table->address = $data->Input('address');
+    	// $table->save();
+            dd($tables);
+
     	return redirect('form')->with('message','Data berhasil di Simpan');
     		}
     }
 
-    public function delete($id){
-    	$delete = Students::find($id);
-    	$delete->delete();
+    public function delete($username){
+    	// $delete = Students::find($username);
+        $delete=DB::table('ofuser')->where('username',$username)->delete();
+        // dd($delete);
+    	// $delete->delete();
     	return redirect('show')->with('delmessage','Data Berasil di delete!!');
     }
 
-    public function getEditForm($id){
-    	$edit= Students::find($id); 
+    public function getEditForm($username){
+        $edit=DB::table('ofuser')->where('username',$username)->first();
+        // dd($edit);
+    	// $edit= Students::find($id); 
     	return view('student.edit')->with('edit',$edit);
     }
 
-    public function update(Request $formdata,$id){
-    	$tabledata = Students::find($id);
+    public function update(Request $formdata, $username){
 
-    	$tabledata->firstname = $formdata->Input('first_name');
-    	$tabledata->lastname = $formdata->Input('last_name');
-    	$tabledata->address = $formdata->Input('address');
-    	$tabledata->save();
+    	
+        $tabledata=DB::table('ofuser')->where('username',$username)->update([
+        'username' => $formdata->Input('username'),
+        'name' => $formdata->Input('name'),
+        'email' => $formdata->Input('email')
+        ]);
+
+        // $tabledata = Students::find($username);
+    	// $tabledata->username = $formdata->Input('username');
+    	// $tabledata->name = $formdata->Input('name');
+    	// $tabledata->email = $formdata->Input('email');
+        // dd($tabledata);
+    	// $tabledata->save();
     	return redirect('show')->with('updatemessage','Data Sudah di Update!!');
     }
 }

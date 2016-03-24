@@ -11,16 +11,15 @@
 	<span style="color:green;">{!!Session::get('message')!!}  </span>
 
 @endif
-	<form action="{{URL::to('update/'.$edit->id)}}" method="POST" >
+	<form action="{{URL::to('update/'.$edit->username)}}" method="POST" >
 	{{csrf_field()}}
 		
-		<input type="text" name="first_name" value="{{$edit->firstname}}" placeholder="nama awal">
+		<input type="text" name="username" value="{{$edit->username}}" placeholder="nama awal">
 		
 		<br>
-		<input type="text" name="last_name" value="{{$edit->lastname}}" placeholder="nama akhir">
-		
+		<input type="text" name="name" value="{{$edit->name}}" placeholder="nama akhir">
 		<br>
-		<textarea name="address"  placeholder="almat">{{$edit->address}}</textarea>
+		<input type="text" name="email" value="{{$edit->email}}" placeholder="nama akhir">
 		
 		<br>
 		<input type="submit"  value="Update" >

@@ -33,11 +33,27 @@ class Gambar extends Controller
         $table->subjudul= $request->Input('sub_judul');
         $table->image= $filename;
         $table->save();
-        dd($table);
+        // dd($table);
     }
     public function showimg(){
+        
         $gambar=Images::all();
         return view('image.show')->with('data',$gambar);
+    }
+    
+    public function tampil($id){
+        $tampilkan = Images::findOrFail($id);
+        // dd($tampilkan->created_at->addDay(5));
+        // dd($tampilkan);
+        return view('image.detail')->with('data',$tampilkan);
+    }
+
+    public function layout(){
+        return view('layout');
+    }
+
+    public function layout2(){
+        return view('layout2');
     }
     
 }
